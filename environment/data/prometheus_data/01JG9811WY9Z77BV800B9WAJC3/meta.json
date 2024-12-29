@@ -1,0 +1,17 @@
+{
+	"ulid": "01JG9811WY9Z77BV800B9WAJC3",
+	"minTime": 1735466400424,
+	"maxTime": 1735473600000,
+	"stats": {
+		"numSamples": 3415501,
+		"numSeries": 3405,
+		"numChunks": 28868
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01JG9811WY9Z77BV800B9WAJC3"
+		]
+	},
+	"version": 1
+}
