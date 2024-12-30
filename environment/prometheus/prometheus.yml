@@ -30,3 +30,11 @@ scrape_configs:
     static_configs:
       - targets: [ "host.docker.internal:9121" ]
     metrics_path: /metrics
+
+  - job_name: 'vetautet-postgres-exporter'
+    honor_labels: true
+    scrape_interval: 5s
+#    scrape_timeout: 60s
+    static_configs:
+      - targets: [ 'host.docker.internal:9187' ]
+    metrics_path: '/metrics'

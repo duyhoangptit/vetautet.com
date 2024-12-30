@@ -176,3 +176,37 @@ services:
       - pre-event-network
     depends_on:
       - elasticsearch
+
+  # postgresql
+  postgres:
+    image: postgres:14
+    container_name: pre-event-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: db_notification
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/db_postgres:/var/lib/postgres
+      - ./data/init:/docker-entrypoint-initdb.d/
+    networks:
+      - pre-event-network
+
+  # postgresql exporter
+  postgres-exporter:
+    image: quay.io/prometheuscommunity/postgres-exporter
+    container_name: pre-event-postgres-exporter
+    restart: always
+    environment:
+      DATA_SOURCE_NAME: postgresql://postgres:root@postgres:5432/db_notification?sslmode=disable
+#      - DATA_SOURCE_URI=postgres:5432/db_notification?sslmode=disable
+#      - DATA_SOURCE_USER=postgres
+#      - DATA_SOURCE_PASS=root
+    depends_on:
+      - postgres
+    ports:
+      - "9187:9187"
+    networks:
+      - pre-event-network
