@@ -22,7 +22,7 @@
                             "mv_date": "%d{yyyy-MM-dd HH:mm:ss:SSS}",
                             "mv_ip": "111.222.333.4444",
                             "mv_thread": "%thread",
-                            "mv_traceId": "%X{traceId}",
+                            "mv_traceId": "%X{COLLECTION_ID}",
                             "mv_level": "%level",
                             "mv_logger": "%logger{40}",
                             "mv_message": "%msg%n"
@@ -30,6 +30,14 @@
                     </pattern>
                 </pattern>
             </providers>
+        </encoder>
+    </appender>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [%X{COLLECTION_ID}] %logger{36} - %msg%n
+            </pattern>
         </encoder>
     </appender>
 
