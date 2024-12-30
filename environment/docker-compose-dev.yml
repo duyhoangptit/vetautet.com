@@ -120,3 +120,59 @@ services:
       - "9104:9104"
     networks:
       - pre-event-network
+
+  # redis exporter
+  redis-exporter:
+    image: oliver006/redis_exporter
+    command: -redis.addr redis://redis:6379
+    ports:
+      - 9121:9121
+    networks:
+      - pre-event-network
+
+  # elastic search
+  elasticsearch:
+    image: elasticsearch:7.17.25
+    container_name: pre-event-elasticsearch
+    volumes:
+      - ./elk/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      discovery.type: single-node
+    networks:
+      - pre-event-network
+
+  # logstash
+  logstash:
+    image: logstash:7.17.25
+    container_name: pre-event-logstash
+    volumes:
+      - ./elk/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./elk/pipeline:/usr/share/logstash/pipeline
+    ports:
+      - "5044:5044"
+      - "5033:5000/tcp"
+      - "5022:8000/udp"
+      - "9600:9600"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - pre-event-network
+    depends_on:
+      - elasticsearch
+
+  # kibana
+  kibana:
+    image: kibana:7.17.25
+    container_name: pre-event-kibana
+    volumes:
+      - ./elk/kibana.yml:/usr/share/kibana/config/logstash.yml
+    ports:
+      - "5601:5601"
+    networks:
+      - pre-event-network
+    depends_on:
+      - elasticsearch

@@ -49,13 +49,14 @@ public class TicketDetailCacheService {
     // CHƯA VIP LẮM - KHI HỌ REVIEW CODE - SẼ BẮT VIẾT LẠI
     public TicketDetail getTicketDefaultCacheVip(Long id, Long version) {
         log.info("Implement getTicketDefaultCacheVip->, {}, {} ", id, version);
-        TicketDetail ticketDetail = ticketDetailDomainService.getTicketDetailById(id);//redisInfrasService.getObject(genEventItemKey(id), TicketDetail.class);
+//        TicketDetail ticketDetail = ticketDetailDomainService.getTicketDetailById(id);//redisInfrasService.getObject(genEventItemKey(id), TicketDetail.class);
+        TicketDetail ticketDetail = redisInfrasService.getObject(genEventItemKey(id), TicketDetail.class);
         // 2. YES
         if (ticketDetail != null) {
-//            log.info("FROM CACHE EXIST {}",ticketDetail);
+            log.info("FROM CACHE EXIST {}",ticketDetail);
             return ticketDetail;
         }
-//        log.info("CACHE NO EXIST, START GET DB AND SET CACHE->, {}, {} ", id, version);
+        log.info("CACHE NO EXIST, START GET DB AND SET CACHE->, {}, {} ", id, version);
         // Tao lock process voi KEY
         RedisDistributedLocker locker = redisDistributedService.getDistributedLock("PRO_LOCK_KEY_ITEM"+id);
         try {
