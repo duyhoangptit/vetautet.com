@@ -15,7 +15,6 @@ public class RedissonConfig {
 
     @Bean
     public RedissonClient redissonClient() {
-        System.out.println("redissonClient");
         Config config = new Config();
         config.useSingleServer().setAddress("redis://127.0.0.1:6319").setConnectionPoolSize(50).setDatabase(0);
 

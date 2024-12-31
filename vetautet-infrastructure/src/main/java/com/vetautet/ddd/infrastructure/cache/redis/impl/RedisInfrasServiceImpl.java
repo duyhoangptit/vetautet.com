@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
@@ -39,7 +40,7 @@ public class RedisInfrasServiceImpl  implements RedisInfrasService {
     }
 
     @Override
-    public void setObject(String key, Object value) {
+    public void setObject(String key, Object value, long ttl, TimeUnit timeUnit) {
 //        log.info("Set redis::1, {}", key);
         if (!StringUtils.hasLength(key)) { // null or ''
 //            log.info("Set redis::null, {}", StringUtils.hasLength(key));
@@ -48,6 +49,7 @@ public class RedisInfrasServiceImpl  implements RedisInfrasService {
 
         try {
             redisTemplate.opsForValue().set(key, value);
+            redisTemplate.expire(key, ttl, timeUnit);
         }catch (Exception e){
             log.error("setObject error:{}",e.getMessage());
         }

@@ -10,3 +10,8 @@ Ket qua
 - Latency: Độ trễ trung bình, trung vị, và cao nhất.
 - Requests/sec: Số yêu cầu được xử lý mỗi giây.
 - Transfer/sec: Tổng lượng dữ liệu được truyền mỗi giây.
+
+### Using echo and vegeta
+     echo "GET http://localhost:1122/ticket/1/detail/1" | vegeta attack -name=2000qps -duration=10s -rate=100 | tee benchmark/results_2000qps.bin | vegeta report
+
+### 

@@ -8,15 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/hello")
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class HiController {
 
     private final EventAppService eventAppService;
-
-    public HiController(EventAppService eventAppService) {
-        this.eventAppService = eventAppService;
-        System.out.println("HiController");
-    }
 
     @GetMapping
     public String hello() {
