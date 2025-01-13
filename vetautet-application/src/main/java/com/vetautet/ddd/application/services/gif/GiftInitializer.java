@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.TimeUnit;
+
 @Component
 public class GiftInitializer {
 
@@ -16,7 +18,8 @@ public class GiftInitializer {
 
     @PostConstruct
     public void initializeGiftCount() {
-        redisTemplate.opsForValue().set("gift:remaining", "100");
-        giftService.getRemainingGifts(1L);
+        redisTemplate.opsForValue().getAndExpire("gift:remaining", 1, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().getAndExpire("gift:1", 1, TimeUnit.SECONDS);
+//        giftService.getRemainingGifts(1L);
     }
 }

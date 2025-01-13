@@ -112,7 +112,7 @@ public class GiftService {
         log.info("claimGiftVip fail");
         // Nếu số lượng quà âm, rollback Redis
         redisTemplate.opsForValue().increment(redisKey);
-        return false;
+        throw new RuntimeException("claimGiftVip fail");
     }
 
     public boolean claimGift() {

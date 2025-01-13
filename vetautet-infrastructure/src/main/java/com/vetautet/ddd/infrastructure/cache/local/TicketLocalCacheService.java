@@ -46,6 +46,10 @@ public class TicketLocalCacheService {
         return ticketDetailRepository.findById(ticketId).orElse(null);
     }
 
+    public void invalidate(Long ticketId) {
+        ticketLocalCache.invalidate(ticketId);
+    }
+
     public void reportCache() {
         // Lấy thống kê
         CacheStats stats = ticketLocalCache.stats();

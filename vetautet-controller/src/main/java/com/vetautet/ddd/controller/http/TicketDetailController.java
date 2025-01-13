@@ -7,10 +7,7 @@ import com.vetautet.ddd.controller.models.vo.ResultMessage;
 import com.vetautet.ddd.domain.models.entities.TicketDetail;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -23,10 +20,11 @@ public class TicketDetailController {
     @GetMapping("/{ticketId}/detail/{detailId}")
     public ResultMessage<TicketDetail> getTicketDetail(
             @PathVariable("ticketId") Long ticketId,
-            @PathVariable("detailId") Long detailId
+            @PathVariable("detailId") Long detailId,
+            @RequestParam Long version
     ) {
         log.info(" ticketId:{}, detailId:{}", ticketId, detailId);
-        return ResultUtil.data(ticketDetailAppService.getTicketDetailById(detailId));
+        return ResultUtil.data(ticketDetailAppService.getTicketDetailById(detailId, version));
     }
 }
 
