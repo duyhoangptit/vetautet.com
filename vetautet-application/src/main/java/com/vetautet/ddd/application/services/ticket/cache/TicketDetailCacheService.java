@@ -3,7 +3,7 @@ package com.vetautet.ddd.application.services.ticket.cache;
 import com.vetautet.ddd.application.models.cache.TicketDetailCache;
 import com.vetautet.ddd.domain.models.entities.TicketDetail;
 import com.vetautet.ddd.domain.services.TicketDetailDomainService;
-import com.vetautet.ddd.infrastructure.cache.local.TicketLocalCacheService;
+import com.vetautet.ddd.infrastructure.cache.local.grava.TicketLocalCacheService;
 import com.vetautet.ddd.infrastructure.cache.redis.RedisInfrasService;
 import com.vetautet.ddd.infrastructure.distributed.redisson.RedisDistributedLocker;
 import com.vetautet.ddd.infrastructure.distributed.redisson.RedisDistributedService;

@@ -1,4 +1,4 @@
-package com.vetautet.ddd.infrastructure.cache.local;
+package com.vetautet.ddd.infrastructure.cache.local.grava;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;

@@ -46,11 +46,6 @@
             <artifactId>fastjson</artifactId>
             <version>2.0.28</version>
         </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava-version}</version>
-        </dependency>
         <!--make distributed cache-->
         <dependency>
             <groupId>org.redisson</groupId>
