@@ -42,7 +42,7 @@ public class TicketDetailCacheService {
             }
 
             // version = version on cache
-            if (version == ticketDetailCache.getVersion()) {
+            if (version.equals(ticketDetailCache.getVersion())) {
                 return ticketDetailCache;
             }
 
@@ -52,11 +52,8 @@ public class TicketDetailCacheService {
             }
 
             // version > version cache
-            if (version > ticketDetailCache.getVersion()) {
-                return getTicketDetailFromDistributedCache(ticketId);
-            }
+            return getTicketDetailFromDistributedCache(ticketId);
 
-            return ticketDetailCache;
         }
 
         return getTicketDetailFromDistributedCache(ticketId);
